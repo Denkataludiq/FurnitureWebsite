@@ -1,0 +1,129 @@
+﻿@model FurnitureWebsite.Models.HomeViewModel
+<!-- Home Section Start -->
+<div class="home">
+    <div class="main-text">
+        <h1> Открийте най-добрите <br> Мебели за вас </h1>
+    </div>
+</div>
+<!-- Home Section End -->
+<!-- Top Section Card Start -->
+<section class="offers">
+    <div class="offer-content">
+        <div class="row">
+            <i class="fa-solid fa-headset"></i>
+            <h3>24/7 Връзка</h3>
+            <p>Постоянна връзка със служители онлайн.</p>
+        </div>
+        <div class="row">
+            <i class="fa-solid fa-rotate-left"></i>
+            <h3>30 Дни право на връшане или замяна</h3>
+        </div>
+        <div class="row">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h3>Безопасно пазаруване</h3>
+            <p>Грижим се за данните на нашите клиенти.</p>
+        </div>
+    </div>
+</section>
+<!-- Top Section Card End -->
+<!-- About Section Start -->
+<section class="about" id="about">
+    <div class="about-img">
+        <img src="./images/logo.png" alt="">
+    </div>
+    <div class="about-text">
+        <h3>За нас</h3>
+        <p>
+            Добре дошли в Мебелен Свят, където стилът среща комфорта и майсторството.
+            <br>От 2003 година сме посветени на създаването на вечни предмети, които издигат жизнените ви
+            пространства. Нашият ангажимент към качеството, иновациите и удовлетвореността на клиентите ни отличава
+            в мебелната индустрия.
+            <br> Разгледайте нашата подбрана колекция, вдъхновете се от нашите дизайни и ни позволете да ви помогнем
+            да превърнете вашето пространство в убежище на стил и комфорт. Благодарим ви, че избрахте Мебелен Свят,
+            където вашият начин на живот се среща с нашето майсторство.
+        </p>
+    </div>
+
+</section>
+<!-- About Section End -->
+<!-- Product Section Start -->
+<section class="product" id="product">
+    <div class="main-txt">
+        <h3>Продукти</h3>
+    </div>
+    <div class="card-content">
+        @foreach (var item in Model.ProductItems)
+        {
+
+            <div class="row">
+                <a href="@this.Url.Action("SingleProduct", "SingleProduct",new { item.ID })">
+                    <img src="data:image/*;base64,@(Convert.ToBase64String(item.Picture))">
+                </a>
+                <a href="@this.Url.Action("SingleProduct", "SingleProduct",new { item.ID })">
+                    <div class="card-body">
+                        <h3>@item.CategoryName "@item.Name"</h3>
+                        <h5><br>@item.Price.ToString("#.##.##") лв.</h5>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
+<!-- Product Section End -->
+<div class="center">
+    <a href="@this.Url.Action("Products", "Products")">
+        <button id="vijvsbtn">Виж Всички</button>
+    </a>
+</div>
+<!-- Banner Start -->
+<section class="sale" id="sale"></section>
+<div class="banner">
+    <div class="banner-content">
+        <h5>Намаления до 50%</h5>
+        <h3>Най-добрите сделки на седмицата</h3>
+        <p>Вземи до 50% отстъпка на избрани продукти тази семица <br>Не го пропускай!</p>
+    </div>
+</div>
+<!-- Banner End -->
+<!-- Sale Products Start -->
+<section class="saleproducts" id="saleproducts" style="margin-top: 50px;">
+    <div class="sale-txt">
+        <h3>Намалени продукти</h3>
+    </div>
+    <div class="card-content">
+        @foreach (var item in Model.ProductDiscountItems)
+        {
+
+            <div class="row">
+                <a href="@this.Url.Action("SingleProduct", "SingleProduct",new { item.ID })">
+                    <img src="data:image/*;base64,@(Convert.ToBase64String(item.Picture))">
+                </a>
+                <a href="@this.Url.Action("SingleProduct", "SingleProduct",new { item.ID })">
+                    <div class="card-body">
+                        <h3>@item.Name</h3>
+                        <div class="heading-container">
+                            <h5 class="s-s">@item.Price.ToString("#.##.##")</h5>
+                            <h5>@Math.Round(item.Price - (item.Price*(item.Discount/100)),2) лв.</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
+<!-- Contact Section Start -->
+<section class="contact" id="contact">
+    <div class="content-text">
+        <h2>Свържете се<span> с нас</span></h2>
+        <p>За директна връзка със служител използвайте долупосочените данни.</p>
+        <ol class="list">
+            <li><a>+359 54 487 6723</a></li>
+            <li><a>mebelensvqtsupport@gmail.com</a></li>
+            <li><a>Враца, България</a></li>
+        </ol>
+    </div>
+</section>
+<a href="#" class="arrow"><i><img src="./images/up-arrow.png" alt="" width="50px"></i></a>
+
+
+

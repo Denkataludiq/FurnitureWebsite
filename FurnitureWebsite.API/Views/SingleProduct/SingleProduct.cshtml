@@ -1,0 +1,120 @@
+﻿@model FurnitureWebsite.Services.Models.ProductItemViewModel
+
+<section class="product" id="product">
+    <div class="gla-txt">
+        <h3>@Model.CategoryName "@Model.Name"</h3>
+
+        <div class="slidershow middle">
+
+            <div class="slides">
+                <input type="radio" name="r" id="r1" checked>
+                <input type="radio" name="r" id="r2">
+                <input type="radio" name="r" id="r3">
+                <input type="radio" name="r" id="r4">
+                <input type="radio" name="r" id="r5">
+                <div class="slide s1">
+                    <img src="data:image/*;base64,@(Convert.ToBase64String(Model.BasePicture))">
+                 </div>
+                @foreach (var picture in Model.Pictures)
+                {
+                    <div class="slide">
+                        <img src="data:image/*;base64,@(Convert.ToBase64String(picture))">
+                    </div>
+                }
+
+            </div>
+
+            <div class="navigation">
+                <label for="r1" class="bar"></label>
+                <label for="r2" class="bar"></label>
+                <label for="r3" class="bar"></label>
+                <label for="r4" class="bar"></label>
+                <label for="r5" class="bar"></label>
+            </div>
+        </div>
+
+        <div class="kutiq">
+            <h3>Детайли</h3>
+            <h2><br>• Описание: </h2>
+            <p><br>@Model.Description</p>
+            <h2><br>• Характеристики: </h2>
+            <p style="text-align: center;">
+                <br>@Model.Characteristic
+            </p>
+            <h2><br>• Общи размери: </h2>
+            <p><br>@Model.Size</p>
+            @if (Model.Discount <= 0)
+            {
+                <h2 style="margin-bottom: -25px;"><br><br>@Model.Price.ToString("#.##.##") лв.</h2> }
+            else
+            {
+                <div style="margin-bottom: -25px;" class="heading-container">
+                    <h2 class="s-s"><br><br>@Model.Price.ToString("#.##.##")</h2>
+                    <h2><br><br>@Math.Round(Model.Price - (Model.Price * (Model.Discount / 100)), 2) лв.</h2>
+                </div>
+            }
+            <!-- Open The Modal -->
+            <button id="myBtn">Резервирай сега</button>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">×</span>
+
+                        <div class="container">
+                            <form id="contact" asp-action="create" asp-controller="SingleProduct" method="post">
+                                <center><h3>Въведете данни</h3></center>
+                                <fieldset>
+                                    <input name="name" placeholder="Име" type="text" tabindex="1" required autofocus>
+                                </fieldset>
+                                <fieldset>
+                                    <input name="phone" placeholder="Телефон" type="text" tabindex="2" required>
+                                </fieldset>
+                                <fieldset>
+                                    <input name="email" placeholder="Имейл" type="text" tabindex="3" required>
+                                </fieldset>
+                                <fieldset>
+                                    <input hidden name="productID" value="@Model.ID">
+                                </fieldset>
+                                <center>
+                                    <fieldset>
+                                        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Резервирай сега</button>
+                                    </fieldset>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

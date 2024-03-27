@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебелен Свят</title>
+    <link rel="icon" href="logo.ico" type="~/image/x-icon">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <nav>
+                <input type="checkbox" id="show-search">
+                <input type="checkbox" id="show-menu">
+                <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+                <div class="content">
+                    <div class="logo"><a href="index.html"><img src="~/images/logo.png" alt=""></a></div>
+
+                    <ul class="links">
+                        <li><a asp-controller ="Home" asp-action ="Index" id="first">Начало</a></li>
+                        <li><a asp-fragment = "about" asp-controller ="Home" asp-action ="Index">За нас</a></li>
+                        <li><a asp-fragment = "product" asp-controller ="Home" asp-action ="Index">Продукти</a></li>
+                        <li><a asp-fragment = "sale" asp-controller ="Home" asp-action ="Index">Намаления</a></li>
+                        <li><a asp-fragment = "contact" asp-controller ="Home" asp-action ="Index">Контакти</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="logo">
+                <img src="~/images/logo.png" alt="">
+            </div>
+
+            <p>Социални мрежи:</p>
+            <div class="socail-links">
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-youtube"></i>
+
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
